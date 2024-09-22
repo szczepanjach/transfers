@@ -1,0 +1,47 @@
+﻿@page "/"
+@rendermode InteractiveServer
+@inject NavigationManager Navigation
+
+<PageTitle>Lista przelewów</PageTitle>
+
+<h1>Lista przelewów</h1>
+<button class="btn btn-primary" @onclick="AddTransfer">Dodaj przelew</button>
+
+@if (_transfers == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Recipient account nNumber</th>
+                <th>Sender first name</th>
+                <th>Sender last name</th>
+                <th>Sender person id</th>
+                <th>Recipient name</th>
+                <th>Recipient NIP</th>
+                <th>Recipient regon</th>
+                <th>Recipient address</th>
+                <th>Transfer type</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transfer in _transfers)
+            {
+                <tr>
+                    <td>@transfer.RecipientAccountNumber</td>
+                    <td>@transfer.SenderFirstName</td>
+                    <td>@transfer.SenderLastName</td>
+                    <td>@transfer.SenderPersonId</td>
+                    <td>@transfer.RecipientName</td>
+                    <td>@transfer.RecipientNIP</td>
+                    <td>@transfer.RecipientRegon</td>
+                    <td>@transfer.RecipientAddress</td>
+                    <td>@transfer.TransferType</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

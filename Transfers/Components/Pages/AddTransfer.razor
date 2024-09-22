@@ -1,0 +1,99 @@
+﻿@page "/addTransfer"
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+<h3>Tworzenie nowego przelewu</h3>
+
+<EditForm Model="_transfer" OnValidSubmit="@Create" FormName="AddTransferForm">
+    <DataAnnotationsValidator />
+    
+    <div class="form-group">
+        <label class="control-label col-md-2">Numer konta odbiorcy</label>
+        <div class="col-md-3 form-control-style">
+            <InputText class="form-control" @bind-Value="_transfer.RecipientAccountNumber" />
+            <ValidationMessage For="(() => _transfer.RecipientAccountNumber)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Imię nadawcy</label>
+        <div class="col-md-3 form-control-style">
+            <InputText class="form-control" @bind-Value="_transfer.SenderFirstName" />
+            <ValidationMessage For="(() => _transfer.SenderFirstName)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Nazwisko nadawcy</label>
+        <div class="col-md-3 form-control-style">
+            <InputText class="form-control" @bind-Value="_transfer.SenderLastName" />
+            <ValidationMessage For="(() => _transfer.SenderLastName)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Pesel nadawcy</label>
+        <div class="col-md-3 form-control-style">
+            <InputText class="form-control" @bind-Value="_transfer.SenderPersonalId" />
+            <ValidationMessage For="(() => _transfer.SenderPersonalId)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Nazwa odbiorcy</label>
+        <div class="col-md-3 form-control-style">
+            <InputText class="form-control" @bind-Value="_transfer.RecipientName" />
+            <ValidationMessage For="(() => _transfer.RecipientName)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Nip odbiorcy</label>
+        <div class="col-md-3 form-control-style">
+            <InputText class="form-control" @bind-Value="_transfer.RecipientNip" />
+            <ValidationMessage For="(() => _transfer.RecipientNip)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Regon odbiorcy</label>
+        <div class="col-md-3 form-control-style">
+            <InputText class="form-control" @bind-Value="_transfer.RecipientRegon" />
+            <ValidationMessage For="(() => _transfer.RecipientRegon)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Adres odbiorcy</label>
+        <div class="col-md-3 form-control-style">
+            <InputText class="form-control" @bind-Value="_transfer.RecipientAddress" />
+            <ValidationMessage For="(() => _transfer.RecipientAddress)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Typ przelewu</label>
+        <div class="col-md-3 form-control-style">
+            <InputSelect @bind-Value="_transfer.TransferTypeId" class="form-control">
+                @foreach (var _transferType in _transferTypes)
+                {
+                    <option value="@_transferType.Id">@_transferType.Name</option>
+                }
+            </InputSelect>
+            <ValidationMessage For="(() => _transfer.TransferTypeId)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Kwota</label>
+        <div class="col-md-3 form-control-style">
+            <InputNumber class="form-control" @bind-Value="_transfer.TransferAmount" />
+            <ValidationMessage For="(() => _transfer.TransferAmount)" />
+        </div>
+    </div>
+    <div class="form-check">
+        <InputCheckbox class="form-check-input" @bind-Value="_transfer.SaveRecipientToAddressBox" />
+        <label class="form-check-label">
+            Czy zapisać odbiorcę do książki adresowej
+        </label>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-3 text-right esh-button-actions form-control-style">
+            <a href="/" class="btn esh-button esh-button-secondary">
+                Anuluj
+            </a>
+            <input type="submit" value="Utwórz" class="btn esh-button esh-button-primary" />
+        </div>
+    </div>
+</EditForm>
